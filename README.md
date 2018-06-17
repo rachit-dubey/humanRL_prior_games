@@ -1,6 +1,6 @@
 Our suit of custom games built to test performance of RL agents for our paper 'Investigating Human Priors for Playing Video Games' published in ICML 2018.
 
-The 'original game' is the original game which contains all prior information. The 'no semantics' is the game which removes semantic information prior. The 'no object' is the game which removes concept of object prior. The 'no affordance' is the game which removes affordance prior. The 'no similarity' is the game which masks similarity prior. 
+The 'original game' is a simple platformer game. The 'no semantics' is the game which removes semantic information prior. The 'no object' is the game which removes concept of object prior. The 'no affordance' is the game which removes affordance prior. The 'no similarity' is the game which masks similarity prior. 
 
 Refer to our paper available here for more details - https://arxiv.org/abs/1802.10217
 
