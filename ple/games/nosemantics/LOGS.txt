@@ -1,0 +1,22 @@
+Change LOGS
+
+Very important: Continous actions are now allowed (previous ple version didn't allow that). For that I changed keydown to keypress and changed indentation, need to make sure that is okay for the DQN. 
+
+1) Created a custom map via text, which puts 1 for platform, 2 for ladder, and 3 for coins.
+
+2) This way we don't need any of the board.py functions that generate the coins, platforms, or ladders by themselves.
+
+3) We can now also create different colored platforms or ladders easily, by giving the different platforms various numbers and simply putting different textures on them. 
+
+4) Removing object prior information is also easy
+
+5) Create 3 maps for various priors
+
+6) Figure out to shorten the map, and also where the initial position of the player is
+
+7) Need to make sure rewards are being generated properly
+
+8) Need to make sure coins Collected function doesn't create problem for DQN
+
+9) to make sure different rewards for win, negative etc, don't affect dqn. is the dqn supposed to gather score instead of reward?
+
