@@ -1,9 +1,9 @@
 ## Investigating Human Priors for Playing Video Games ##
 #### In ICML 2018 [[Project Website]](https://rach0012.github.io/humanRL_website/) 
-![Games](screens.png?raw=True "Games!")
-
 [Rachit Dubey](http://cocosci.berkeley.edu/rachit/), [Pulkit Agrawal](https://people.eecs.berkeley.edu/~pulkitag/), [Deepak Pathak](https://people.eecs.berkeley.edu/~pathak/), [Thomas L. Griffiths](http://cocosci.berkeley.edu/tom/tom.php), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/)<br/>
 University of California, Berkeley<br/>
+
+![Games](screens.png?raw=True "Games!")
 
 This contains code for our suit of custom games built to test performance of RL agents for our paper 'Investigating Human Priors for Playing Video Games' published in ICML 2018.
 
