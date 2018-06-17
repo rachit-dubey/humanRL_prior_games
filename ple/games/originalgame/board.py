@@ -27,7 +27,7 @@ class Board(object):
         self.direction = 0
         self._dir = _dir
         
-        self.playerPosition = (120, 90)
+        self.playerPosition = (120, 190)
         self.princessPosition = (30,47)
 
         self.IMAGES = {
@@ -101,7 +101,7 @@ class Board(object):
         return 0
 
     def populateMap(self):
-        self.map = np.loadtxt("map_test2.txt", dtype='i', delimiter=',') #use numpy for python3
+        self.map = np.loadtxt("map.txt", dtype='i', delimiter=',') #use numpy for python3
 
         for x in range(len(self.map)):
             for y in range(len(self.map[x])):

@@ -2,7 +2,7 @@
 #    from ple.games.doom import Doom
 #except:
 #    print("Couldn't import doom")
-from ple.games.original import MonsterKong
+from ple.games.originalgame import originalGame
 from ple.games.nosemantics import MonsterKong_nosemantics
 from ple.games.nosimilarity import MonsterKong_nosimilarity
 from ple.games.noobject import MonsterKong_noobject
