@@ -1,4 +1,4 @@
-__author__ = 'Batchu Vishal'
+__author__ = 'Rachit Dubey'
 import pygame
 import math
 import sys
@@ -6,13 +6,13 @@ import os
 import numpy as np
 from .person import Person
 from .onBoard import OnBoard
-from .coin import Coin
+from .enemy import enemy
 from .player import Player
 
 class Board(object):
     '''
     This class defines our gameboard.
-    A gameboard contains everthing related to our game on it like our characters, walls, ladders, coins etc
+    A gameboard contains everthing related to our game on it like our characters, walls, ladders, enemies etc
     The generation of the level also happens in this class.
     '''
 
@@ -27,15 +27,14 @@ class Board(object):
         self.direction = 0
         self._dir = _dir
         
-        self.playerPosition = (120, 190) #change here depending on game width and height
-        self.princessPosition = (30,47)
+        self.playerPosition = (120, 180)
+        self.princessPosition = (30,62)
 
         self.IMAGES = {
             "still": pygame.image.load(os.path.join(_dir, 'assets/still.png')).convert_alpha(),
-            "monster0": pygame.image.load(os.path.join(_dir, 'assets/monster0.png')).convert_alpha(),
             "princess": pygame.image.load(os.path.join(_dir, 'assets/princess.png')).convert_alpha(),
-            "coin1": pygame.image.load(os.path.join(_dir, 'assets/enemy1.png')).convert_alpha(),
-            "coin2": pygame.image.load(os.path.join(_dir, 'assets/fire.png')).convert_alpha(),
+            "enemy1": pygame.image.load(os.path.join(_dir, 'assets/enemy1.png')).convert_alpha(),
+            "enemy2": pygame.image.load(os.path.join(_dir, 'assets/fire.png')).convert_alpha(),
             "wood_block": pygame.image.load(os.path.join(_dir, 'assets/wood_block1.png')).convert_alpha(),
             "wood_block2": pygame.image.load(os.path.join(_dir, 'assets/wood_block2.png')).convert_alpha(),
             "wood_block3": pygame.image.load(os.path.join(_dir, 'assets/wood_block3.png')).convert_alpha(),
@@ -43,23 +42,23 @@ class Board(object):
             "wood_block5": pygame.image.load(os.path.join(_dir, 'assets/wood_block5.png')).convert_alpha(),
             "boundary": pygame.image.load(os.path.join(_dir, 'assets/boundary.png')).convert_alpha(),            
             "ladder": pygame.image.load(os.path.join(_dir, 'assets/ladder2.png')).convert_alpha(),
-            "background": pygame.image.load(os.path.join(_dir, 'assets/background2.png')).convert_alpha(),
-
+            "background": pygame.image.load(os.path.join(_dir, 'assets/background.png')).convert_alpha()
         }
 
         self.white = (255, 255, 255)
-        self.IMAGES["background"] = pygame.transform.scale(self.IMAGES["background"],(240,232));
+        self.IMAGES["background"] = pygame.transform.scale(self.IMAGES["background"], (240, 232));
+
         '''
         The map is essentially an array of 30x80 in which we store what each block on our map is.
-        1 represents a wall, 2 for a ladder and 3 for a coin.
+        1 represents a wall, 2 for a ladder and 3 for a enemy.
         '''
         self.map = []
         # These are the arrays in which we store our instances of different
         # classes
         self.Players = []
         self.Allies = []
-        self.Coins = []
-        self.Coins2 = []
+        self.enemys = []
+        self.enemys2 = []
         self.Walls = []
         self.Ladders = []
         self.Boards = []
@@ -72,8 +71,8 @@ class Board(object):
         self.playerGroup = pygame.sprite.RenderPlain(self.Players)
         self.wallGroup = pygame.sprite.RenderPlain(self.Walls)
         self.ladderGroup = pygame.sprite.RenderPlain(self.Ladders)
-        self.coinGroup = pygame.sprite.RenderPlain(self.Coins)
-        self.coinGroup2 = pygame.sprite.RenderPlain(self.Coins2)
+        self.enemyGroup = pygame.sprite.RenderPlain(self.enemys)
+        self.enemyGroup2 = pygame.sprite.RenderPlain(self.enemys2)
         self.allyGroup = pygame.sprite.RenderPlain(self.Allies)
 
     def resetGroups(self):
@@ -83,14 +82,14 @@ class Board(object):
         self.Players = [Player(self.IMAGES["still"],self.playerPosition,15,15)] #initial position of the player
         self.Allies = [Person(self.IMAGES["princess"], self.princessPosition, 18, 25)] #initial position of the goal i.e. princess
         self.Allies[0].updateWH(self.Allies[0].image, "H", 0, 25, 25)
-        self.Coins = []
-        self.Coins2 = []
+        self.enemys = []
+        self.enemys2 = []
         self.Walls = []
         self.Ladders = []
         self.initializeGame()  # This initializes the game and generates our map
         self.createGroups()  # This creates the instance groups
 
-    # Given a position and checkNo ( 1 for wall, 2 for ladder, 3 for coin) the
+    # Given a position and checkNo ( 1 for wall, 2 for ladder, 3 for enemy) the
     # function tells us if its a valid position to place or not
     def checkMapForMatch(self, placePosition, floor, checkNo, offset):
         if floor < 1:
@@ -104,9 +103,7 @@ class Board(object):
         return 0
 
     def populateMap(self):
-        #f = open ( 'map_short.txt' , 'r')
-        #self.map = [ map(int,line.split(',')) for line in f if line.strip() != "" ] #load your own custom map here - map object works for python2
-        self.map = np.loadtxt("map_short_enemies.txt", dtype='i', delimiter=',') #use numpy for python3
+        self.map = np.loadtxt("map_3.txt", dtype='i', delimiter=',') #use numpy for python3
 
         for x in range(len(self.map)):
             for y in range(len(self.map[x])):
@@ -125,18 +122,18 @@ class Board(object):
                             (y * 15 + 15 / 2,
                              x * 15 + 15 / 2)))
                 elif self.map[x][y] == 11:
-                    # Add the coin to our coin list
-                    self.Coins.append(
-                        Coin(
-                            self.IMAGES["coin1"],
+                    # Add the enemy to our enemy list
+                    self.enemys.append(
+                        enemy(
+                            self.IMAGES["enemy1"],
                             (y * 15 + 15 / 2,
                              x * 15 + 15 / 2),
                              self._dir))
                 elif self.map[x][y] == 12:
-                    # Add the coin to our coin list
-                    self.Coins2.append(
-                        Coin(
-                            self.IMAGES["coin2"],
+                    # Add the enemy to our enemy list
+                    self.enemys2.append(
+                        enemy(
+                            self.IMAGES["enemy2"],
                             (y * 15 + 15 / 2,
                              x * 15 + 15 / 2),
                              self._dir))
@@ -186,33 +183,25 @@ class Board(object):
         else:
             self.Players[0].onLadder = 0
 
-    # Check for coins collided and add the appropriate score
-    def coinCheck(self, coinsCollected):
-        for coin in coinsCollected:
-            #self.score += self.rewards["negative"]
-            if(self.Players[0].getPosition()[1]+7 < coin.getPosition()[1]):
-                 coin.kill()
+    # Check for enemys collided and add the appropriate score
+    def enemyCheck(self, enemysCollected):
+        for enemy in enemysCollected:
+            if(self.Players[0].getPosition()[1]+7 < enemy.getPosition()[1]):
+                 enemy.kill()
             else:
-                 self.Players[0].setPosition(self.playerPosition) #player dies when reaches coin (coin is basically the enemy)
-                 # We also remove the coin entry from our map
-                 #self.map[int((coin.getPosition()[1] - 15 / 2) /
-                 #         15)][int((coin.getPosition()[0] - 15 / 2) / 15)] = 0
+                 self.Players[0].setPosition(self.playerPosition) #player dies when reaches enemy 
                  self.lives = 0
                  status = 0
-                 # Remove the coin entry from our list
-                 #self.Coins.remove(coin)
-                 # Update the coin group since we modified the coin list
+                 # Update the enemy group since we modified the enemy list
                  self.createGroups()
     
     
-    def coinCheck2(self,coinsCollected2):
-        for coins2 in coinsCollected2:
-            self.Players[0].setPosition(self.playerPosition) #player dies when reaches coin (coin is basically the enemy)
+    def enemyCheck2(self,enemysCollected2):
+        for enemys2 in enemysCollected2:
+            self.Players[0].setPosition(self.playerPosition) #player dies when reaches enemy 
             self.lives = 0
             self.createGroups()
     
- 
-
     # Check if the player wins
     def checkVictory(self,status):
         # If you touch the princess or reach the floor with the princess you
@@ -222,8 +211,6 @@ class Board(object):
             self.score += self.rewards["win"]
             self.lives = 0		
             status = 1
-            # This is just the next level so we only clear the fireballs and
-            # regenerate the coins
             self.Players[0].setPosition(self.playerPosition)
             self.createGroups()
         return status
@@ -231,12 +218,12 @@ class Board(object):
     # Redraws the entire game screen for us
     def redrawScreen(self, screen, width, height):
         screen.fill((40, 20, 0))  # Fill it with black
-        screen.blit(self.IMAGES["background"],(0,0))
+        screen.blit(self.IMAGES["background"], (0, 0))
         # Draw all our groups on the background
         self.ladderGroup.draw(screen)
         self.playerGroup.draw(screen)
-        self.coinGroup2.draw(screen)
-        self.coinGroup.draw(screen)
+        self.enemyGroup2.draw(screen)
+        self.enemyGroup.draw(screen)
         self.wallGroup.draw(screen)
         self.allyGroup.draw(screen)
 
@@ -245,16 +232,11 @@ class Board(object):
         self.playerGroup = pygame.sprite.RenderPlain(self.Players)
         self.wallGroup = pygame.sprite.RenderPlain(self.Walls)
         self.ladderGroup = pygame.sprite.RenderPlain(self.Ladders)
-        self.coinGroup = pygame.sprite.RenderPlain(self.Coins)
-        self.coinGroup2 = pygame.sprite.RenderPlain(self.Coins2)
+        self.enemyGroup = pygame.sprite.RenderPlain(self.enemys)
+        self.enemyGroup2 = pygame.sprite.RenderPlain(self.enemys2)
         self.allyGroup = pygame.sprite.RenderPlain(self.Allies)
 
-    '''
-    Initialize the game by making the map, generating walls, generating princess chamber, generating ladders randomly,
-    generating broken ladders randomly, generating holes, generating coins randomly, adding the ladders and walls to our lists
-    and finally updating the groups.
-    '''
-
+    
     def initializeGame(self):
         self.populateMap()
         self.createGroups()

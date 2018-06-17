@@ -6,6 +6,6 @@ from ple.games.originalgame import originalGame
 from ple.games.nosemantics import nosemantics
 from ple.games.nosimilarity import MonsterKong_nosimilarity
 from ple.games.noobject import noobject
-from ple.games.noaffordance import MonsterKong_noaffordance
+from ple.games.noaffordance import noaffordance
 from ple.games.noaffordance_nosemantics import MonsterKong_noaffordance_nosemantics
 
