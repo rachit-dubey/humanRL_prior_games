@@ -1,20 +1,6 @@
-# PyGame-Learning-Environment
+Our suit of custom games built for our paper
 
-![Games](ple_games.jpg?raw=True "Games!")
-
-**PyGame Learning Environment (PLE)** is a learning environment, mimicking the [Arcade Learning Environment](https://github.com/mgbellemare/Arcade-Learning-Environment) interface, allowing a quick start to Reinforcement Learning in Python. The goal of PLE is allow practitioners to focus design of models and experiments instead of environment design.
-
-PLE hopes to eventually build an expansive library of games.
-
-**Accepting PRs for games.**
-
-## Documentation
-
-Docs for the project can be [found here](http://pygame-learning-environment.readthedocs.org/). They are currently WIP.
-
-## Games
-
-Available games can be found in the [docs](http://pygame-learning-environment.readthedocs.org/en/latest/user/games.html).
+We used the PyGame-Learning-Environment to build these games. All the games are based on the codes from the game 'MonsterKong' from PLE. 
 
 ## Getting started
 
@@ -23,9 +9,9 @@ A `PLE` instance requires a game exposing a set of control methods. To see the r
 Here's an example of importing Pong from the games library within PLE:
 
 ```python
-from ple.games.pong import Pong
+from ple.games.originalGame import originalGame
 
-game = Pong()
+game = originalGame()
 ```
 
 Next we configure and initialize PLE:
@@ -85,37 +71,4 @@ Set the following in your code before usage:
 ```python
 os.putenv('SDL_VIDEODRIVER', 'fbcon')
 os.environ["SDL_VIDEODRIVER"] = "dummy"
-```
-
-Thanks to [@wooridle](https://github.com/ntasfi/PyGame-Learning-Environment/issues/26#issuecomment-289517054).
-
-## Updating
-
-`cd` into the `PyGame-Learning-Environment` directory and run the following:
-
-```bash
-git pull
-```
-
-## Todos
- * Documentation is currently in progress.
- * Tests
- * Parallel Learning (One agent, many game copies)
- * Add games
- * Generalize the library (eg. add Pyglet support)
-
-
-## Citing PLE
-
-If PLE has helped your research please cite it in your publications. Example BibTeX entry:
-
-```
-@misc{tasfi2016PLE,
-  author = {Tasfi, Norman},
-  title = {PyGame Learning Environment},
-  year = {2016},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/ntasfi/PyGame-Learning-Environment}}
-}
 ```
