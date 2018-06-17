@@ -9,6 +9,8 @@ Refer to our paper available here for more details - https://arxiv.org/abs/1802.
 We used the PyGame-Learning-Environment to build these games - https://github.com/ntasfi/PyGame-Learning-Environment. 
 All the games are based on the codes from the game 'MonsterKong' from PLE. 
 
+To train your RL agent on the games, you would also need gym-ple, a package that allows to use PLE as a gym environment. Our version of gym-ple which includes our games is available here - https://github.com/rach0012/humanRL_gym_ple/
+
 ## Getting started
 
 A `PLE` instance requires a game exposing a set of control methods. To see the required methods look at `ple/games/base.py`. 
