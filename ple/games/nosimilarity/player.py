@@ -15,7 +15,7 @@ class Player(Person):
         self.isJumping = 0
         self.onLadder = 0
         self.currentJumpSpeed = 0
-        self.__gravity = 0.8  # Gravity affecting the jump velocity of the player
+        self.__gravity = 1  # Gravity affecting the jump velocity of the player
         self.__speed = 7  # Movement speed of the player
 
     # Getters and Setterss

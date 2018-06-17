@@ -1,4 +1,4 @@
-__author__ = 'Batchu Vishal'
+__author__ = 'Rachit Dubey'
 import pygame
 import sys
 from pygame.constants import K_a, K_d, K_SPACE, K_w, K_s, QUIT, KEYDOWN
@@ -10,7 +10,7 @@ import numpy as np
 import os
 
 
-class MonsterKong_nosimilarity(PyGameWrapper):
+class nosimilarity(PyGameWrapper):
 
 	def __init__(self):
 		"""
@@ -34,19 +34,19 @@ class MonsterKong_nosimilarity(PyGameWrapper):
 			self, self.width, self.height, actions=actions)
 
 		self.rewards = {
-			"positive": 0, #original was 5
+			"positive": 0, 
 			"win": 1,
-			"negative": 0, #original was -25
+			"negative": 0, 
 			"tick": 0
 		}
 		self.allowed_fps = 30
 		self._dir = os.path.dirname(os.path.abspath(__file__))
 
 		self.IMAGES = {
-			"right": pygame.image.load(os.path.join(self._dir, 'assets/right.png')),
-			"right2": pygame.image.load(os.path.join(self._dir, 'assets/right2.png')),
-			"left": pygame.image.load(os.path.join(self._dir, 'assets/left.png')),
-			"left2": pygame.image.load(os.path.join(self._dir, 'assets/left2.png')),
+			"right": pygame.image.load(os.path.join(self._dir, 'assets/still.png')),
+			"right2": pygame.image.load(os.path.join(self._dir, 'assets/still.png')),
+			"left": pygame.image.load(os.path.join(self._dir, 'assets/still.png')),
+			"left2": pygame.image.load(os.path.join(self._dir, 'assets/still.png')),
 			"still": pygame.image.load(os.path.join(self._dir, 'assets/still.png'))
 		}
 
@@ -80,8 +80,8 @@ class MonsterKong_nosimilarity(PyGameWrapper):
 		self.newGame.score += self.rewards["tick"]
 		# This is where the actual game is run
 		# Get the appropriate groups
-		self.coinGroup = self.newGame.coinGroup
-		self.coinGroup2 = self.newGame.coinGroup2
+		self.enemyGroup = self.newGame.enemyGroup
+		self.enemyGroup2 = self.newGame.enemyGroup2
 		# To check collisions below, we move the player downwards then check
 		# and move him back to his original location
 		self.newGame.Players[0].updateY(2)
@@ -187,35 +187,23 @@ class MonsterKong_nosimilarity(PyGameWrapper):
 		self.newGame.Players[0].continuousUpdate(
 			self.wallGroup, self.ladderGroup)
 
-		'''
-		We use cycles to animate the character, when we change direction we also reset the cycles
-		We also change the direction according to the key pressed
-		'''
-
 		# Redraws all our instances onto the screen
 		self.newGame.redrawScreen(self.screen, self.width, self.height)
 
-		# Collect a coin
-		coinsCollected = pygame.sprite.spritecollide(
-			self.newGame.Players[0], self.coinGroup, True)
-		coinsCollected2 = pygame.sprite.spritecollide(
-			self.newGame.Players[0], self.coinGroup2, True)
-		self.newGame.coinCheck2(coinsCollected2)
-		self.newGame.coinCheck(coinsCollected)
+		#enemy encounter
+		enemysCollected = pygame.sprite.spritecollide(
+			self.newGame.Players[0], self.enemyGroup, True)
+		enemysCollected2 = pygame.sprite.spritecollide(
+			self.newGame.Players[0], self.enemyGroup2, True)
+		self.newGame.enemyCheck2(enemysCollected2)
+		self.newGame.enemyCheck(enemysCollected)
 
 		# Check if you have reached the princess
 		self.status = self.newGame.checkVictory(self.status)
-		#with open('agentStatus.txt', 'w') as f:
-		#	if self.status == 0:
-		#		f.write("NOOO")
-		#	elif self.status == 1:
-		#		f.write("HOORAY")
-		#self.status = 2
-		
 if __name__ == "__main__":
 	pygame.init()
 	# Instantiate the Game class and run the game
-	game = MonsterKong_nosimilarity()
+	game = nosimilarity()
 	game.screen = pygame.display.set_mode(game.getScreenDims(), 0, 32)
 	game.clock = pygame.time.Clock()
 	game.rng = np.random.RandomState(24)
