@@ -1,4 +1,4 @@
-__author__ = 'Batchu Vishal'
+__author__ = 'Rachit Dubey'
 import pygame
 import math
 import sys
