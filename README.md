@@ -19,11 +19,9 @@ To train your RL agent on the games, you would also need gym-ple, a package that
 If you find this work useful in your research, please cite:
 
     @inproceedings{dubeyICMl18humanRL,
-        Author = {Dubey, Rachit and Agrawal, Pulkit
-    and Pathak, Deepak and Griffiths, Thomas L.
-    and Efros, Alexei A.},
-        Title = {Investigating Human Priors for
-    Playing Video Games},
+        Author = {Dubey, Rachit and Agrawal, Pulkit and Pathak, Deepak and Griffiths, Thomas L.
+                 and Efros, Alexei A.},
+        Title = {Investigating Human Priors for Playing Video Games},
         Booktitle = {International Conference on Machine Learning ({ICML})},
         Year = {2018}
     }
