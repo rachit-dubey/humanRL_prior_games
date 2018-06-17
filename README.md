@@ -6,7 +6,8 @@ The 'original game' is a simple platformer game. The 'no semantics' is the game 
 
 Refer to our paper available here for more details - https://arxiv.org/abs/1802.10217
 
-We used the PyGame-Learning-Environment to build these games. All the games are based on the codes from the game 'MonsterKong' from PLE. 
+We used the PyGame-Learning-Environment to build these games - https://github.com/ntasfi/PyGame-Learning-Environment. 
+All the games are based on the codes from the game 'MonsterKong' from PLE. 
 
 ## Getting started
 
