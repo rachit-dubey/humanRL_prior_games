@@ -1,4 +1,8 @@
-Our suit of custom games built for our paper
+Our suit of custom games built to test performance of RL agents for our paper 'Investigating Human Priors for Playing Video Games' published in ICML 2018.
+
+The 'original game' is the original game which contains all prior information. The 'no semantics' is the game which removes semantic information prior. The 'no object' is the game which removes concept of object prior. The 'no affordance' is the game which removes affordance prior. The 'no similarity' is the game which masks similarity prior. 
+
+Refer to our paper available here for more details - https://arxiv.org/abs/1802.10217
 
 We used the PyGame-Learning-Environment to build these games. All the games are based on the codes from the game 'MonsterKong' from PLE. 
 
@@ -6,7 +10,7 @@ We used the PyGame-Learning-Environment to build these games. All the games are 
 
 A `PLE` instance requires a game exposing a set of control methods. To see the required methods look at `ple/games/base.py`. 
 
-Here's an example of importing Pong from the games library within PLE:
+Here's an example of importing the original game from the games library within PLE:
 
 ```python
 from ple.games.originalGame import originalGame
