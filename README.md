@@ -16,6 +16,8 @@ All the games are based on the codes from the game 'MonsterKong' from PLE.
 
 To train your RL agent on the games, you would also need gym-ple, a package that allows to use PLE as a gym environment. Our version of gym-ple which includes our games is available here - https://github.com/rach0012/humanRL_gym_ple/
 
+For the experiments in our paper, we used A3C-ICM, a curiosity augmented RL algorithm which is available here - https://github.com/pathak22/noreward-rl. Ping me if you need help running the curiosity algorithm on our games.
+
 If you find this work useful in your research, please cite:
 
     @inproceedings{dubeyICMl18humanRL,
