@@ -1,10 +1,33 @@
-Our suit of custom games built to test performance of RL agents for our paper 'Investigating Human Priors for Playing Video Games' published in ICML 2018.
+## Investigating Human Priors for Playing Video Games ##
+#### In ICML 2018 [[Project Website]](https://rach0012.github.io/humanRL_website/) 
+[Rachit Dubey](http://cocosci.berkeley.edu/rachit/), [Pulkit Agrawal](https://people.eecs.berkeley.edu/~pulkitag/), [Deepak Pathak](https://people.eecs.berkeley.edu/~pathak/), [Thomas L. Griffiths](http://cocosci.berkeley.edu/tom/tom.php), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/)<br/>
+University of California, Berkeley<br/>
+
+![Games](screens.png?raw=True "Games!")
+
+This contains code for our suit of custom games built to test performance of RL agents for our paper 'Investigating Human Priors for Playing Video Games' published in ICML 2018.
 
 The 'original game' is a simple platformer game. The 'no semantics' is the game which removes semantic information prior. The 'no object' is the game which removes concept of object prior. The 'no affordance' is the game which removes affordance prior. The 'no similarity' is the game which masks similarity prior. 
 
 Refer to our paper available here for more details - https://arxiv.org/abs/1802.10217
 
-We used the PyGame-Learning-Environment to build these games. All the games are based on the codes from the game 'MonsterKong' from PLE. 
+We used the PyGame-Learning-Environment to build these games - https://github.com/ntasfi/PyGame-Learning-Environment. 
+All the games are based on the codes from the game 'MonsterKong' from PLE. 
+
+To train your RL agent on the games, you would also need gym-ple, a package that allows to use PLE as a gym environment. Our version of gym-ple which includes our games is available here - https://github.com/rach0012/humanRL_gym_ple/
+
+For the experiments in our paper, we used A3C-ICM, a curiosity augmented RL algorithm which is available here - https://github.com/pathak22/noreward-rl. 
+
+If you find this work useful in your research, please cite:
+
+    @inproceedings{dubeyICMl18humanRL,
+        Author = {Dubey, Rachit and Agrawal, Pulkit and Pathak, Deepak and Griffiths, Thomas L.
+                 and Efros, Alexei A.},
+        Title = {Investigating Human Priors for Playing Video Games},
+        Booktitle = {International Conference on Machine Learning ({ICML})},
+        Year = {2018}
+    }
+
 
 ## Getting started
 
