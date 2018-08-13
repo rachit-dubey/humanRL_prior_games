@@ -10,7 +10,7 @@ import numpy as np
 import os
 
 
-class originalGame(PyGameWrapper):
+class continualgame(PyGameWrapper):
 
 	def __init__(self):
 		"""
@@ -203,7 +203,7 @@ class originalGame(PyGameWrapper):
 if __name__ == "__main__":
 	pygame.init()
 	# Instantiate the Game class and run the game
-	game = originalGame()
+	game = continualgame()
 	game.screen = pygame.display.set_mode(game.getScreenDims(), 0, 32)
 	game.clock = pygame.time.Clock()
 	game.rng = np.random.RandomState(24)
