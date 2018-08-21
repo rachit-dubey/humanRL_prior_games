@@ -19,8 +19,8 @@ class continualgame(PyGameWrapper):
 		None
 
 		"""
-		self.height = 230 #modify height accordingly based on how long the game level is 
-		self.width = 230
+		self.height = 150 #modify height accordingly based on how long the game level is, orignal was 230*230
+		self.width = 150
 		self.status = 2
 		actions = {
 			"left": K_a,

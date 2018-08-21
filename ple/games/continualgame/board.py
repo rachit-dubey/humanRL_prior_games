@@ -103,8 +103,8 @@ class Board(object):
         self.createGroups()
 
     def populateMap(self):
-        j = randint(0,19)
-        s = "map"+str(j)+".txt"
+        j = randint(1,120)
+        s = 'curriculum_maps/'+str(j)+".txt"
         print(s)
         self.map = np.loadtxt(s, dtype='i', delimiter=',') #load new map everytime        
         for x in range(len(self.map)):
