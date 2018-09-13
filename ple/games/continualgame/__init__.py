@@ -72,8 +72,12 @@ class continualgame(PyGameWrapper):
 			return 1
 		else:
 			return 0
-		
+
+	def position(self): #function to simply return position of Player
+		return self.newGame.Players[0].getPosition()
+
 	def step(self, dt):
+
 		self.numactions = self.numactions+1 #check number of actions taken by agent so far
 		self.newGame.score += self.rewards["tick"]
 		# This is where the actual game is run
