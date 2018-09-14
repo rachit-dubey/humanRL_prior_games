@@ -12,6 +12,7 @@ maxRows = 10
 maxCols = 10
 
 for i in range(30):
+	print(i)
 	mapTmp = np.zeros((maxRows, maxCols), dtype='int8')
 	minSize = min(maxRows, maxCols)
 
@@ -73,7 +74,7 @@ for i in range(30):
 	mapTmp[0:10, 0] = 1
 	mapTmp[0:10, 9] = 1
 
-	s = "map_4_"+str(i)+".txt"
+	s = "map_4_"+str(i+23)+".txt"
 	np.savetxt(s,mapTmp,fmt='%d',delimiter=',')
 
 

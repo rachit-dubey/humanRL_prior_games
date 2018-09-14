@@ -104,7 +104,7 @@ class Board(object):
 
     def populateMap(self):
         j = randint(1,120)
-        s = 'curriculum_maps/'+str(j)+".txt"
+        s = 'curriculum_maps_3/'+str(j)+".txt"
         print(s)
         self.map = np.loadtxt(s, dtype='i', delimiter=',') #load new map everytime        
         for x in range(len(self.map)):
