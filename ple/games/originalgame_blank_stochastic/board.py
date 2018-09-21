@@ -9,7 +9,7 @@ from .onBoard import OnBoard
 from .enemy import enemy
 from .player import Player
 from random import randint
-
+import random
 #This game doesn't have any default location of princess or robot sprite - they can be anywhere depending on the map being used (their location are directly read from the map - 20 for princess, 21 for robot)
 
 class Board(object):
@@ -105,10 +105,41 @@ class Board(object):
         self.createGroups()
 
     def populateMap(self):
-        j = randint(91,120)
-        s = 'stochastic_maps/'+str(j)+".txt"
-        print(s)
-        self.map = np.loadtxt(s, dtype='i', delimiter=',') #load new map everytime        
+        
+        s = "map_4.txt"
+        self.map = np.loadtxt(s, dtype='i', delimiter=',') #load map
+
+        #random enemy initilialization for every episode
+        speed=random.uniform(0,1)
+        n = randint(20,40)
+        #enemy 1
+        y = 7#random.choice([2,5,8])
+        x = random.randint(2,12)
+        l = [x-1,x,x+1]
+        while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
+            x = random.randint(2,12)
+            l = [x-1,x,x+1]
+        self.map[y,x] = 11
+
+        #enemy 2
+        y = 7#random.choice([2,5,8])
+        x = random.randint(2,12)
+        l = [x-1,x,x+1]
+        while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
+            x = random.randint(2,12)
+            l = [x-1,x,x+1]
+        self.map[y,x] = 11
+
+        #enemy 3 which is at top
+        y = 5#random.choice([2,5,8])
+        x = random.randint(2,9)
+        l = [x-1,x,x+1]
+        while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
+            x = random.randint(2,9)
+            l = [x-1,x,x+1]
+        self.map[y,x] = 13
+
+        #put objects       
         for x in range(len(self.map)):
             for y in range(len(self.map[x])):
                 if self.map[x][y] == 1:
@@ -149,7 +180,15 @@ class Board(object):
                             self.IMAGES["enemy1"],
                             (y * 15 + 15 / 2,
                              x * 15 + 15 / 2),
-                             self._dir))
+                             self._dir,speed,n))
+                elif self.map[x][y] == 13:
+                    # Add the enemy to our enemy list
+                    self.enemys.append(
+                        enemy(
+                            self.IMAGES["enemy1"],
+                            (y * 15 + 15 / 2,
+                             x * 15 + 15 / 2),
+                             self._dir,0.7,100))
                 elif self.map[x][y] == 12:
                     # Add the enemy to our enemy list
                     self.enemys2.append(
