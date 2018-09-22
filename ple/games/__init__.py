@@ -10,4 +10,6 @@ from ple.games.continualgame_stochastic import continualgame_stochastic
 from ple.games.continualgame_blank import continualgame_blank
 from ple.games.continualgame_blank_stochastic import continualgame_blank_stochastic
 from ple.games.continualgame_blank_control import continualgame_blank_control
+from ple.games.controlgame_stochastic import controlgame_stochastic
+from ple.games.controlgame_blank_stochastic import controlgame_blank_stochastic
 

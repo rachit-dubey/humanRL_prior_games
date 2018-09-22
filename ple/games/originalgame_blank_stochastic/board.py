@@ -48,7 +48,6 @@ class Board(object):
 
         self.white = (255, 255, 255)
         self.IMAGES["background"] = pygame.transform.scale(self.IMAGES["background"], (240, 232));
-
         '''
         The map is essentially an array of 30x80 in which we store what each block on our map is.
         1 represents a wall, 2 for a ladder and 3 for a enemy.
@@ -106,14 +105,13 @@ class Board(object):
 
     def populateMap(self):
         
-        s = "map_4.txt"
+        s = "map_5.txt"
         self.map = np.loadtxt(s, dtype='i', delimiter=',') #load map
 
         #random enemy initilialization for every episode
-        speed=random.uniform(0,1)
-        n = randint(20,40)
+
         #enemy 1
-        y = 7#random.choice([2,5,8])
+        y = random.choice([5,8])
         x = random.randint(2,12)
         l = [x-1,x,x+1]
         while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
@@ -122,7 +120,7 @@ class Board(object):
         self.map[y,x] = 11
 
         #enemy 2
-        y = 7#random.choice([2,5,8])
+        y = random.choice([5,8])
         x = random.randint(2,12)
         l = [x-1,x,x+1]
         while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
@@ -130,18 +128,20 @@ class Board(object):
             l = [x-1,x,x+1]
         self.map[y,x] = 11
 
-        #enemy 3 which is at top
-        y = 5#random.choice([2,5,8])
+        #enemy 3 
+        y = random.choice([5,8])
         x = random.randint(2,9)
         l = [x-1,x,x+1]
         while[k for k in l if self.map[y,k]>1]: #if next to any goal or agent, new position again
             x = random.randint(2,9)
             l = [x-1,x,x+1]
-        self.map[y,x] = 13
+        self.map[y,x] = 11
 
         #put objects       
         for x in range(len(self.map)):
             for y in range(len(self.map[x])):
+                speed=random.uniform(0,1)
+                n = randint(20,40)
                 if self.map[x][y] == 1:
                     # Add a wall at that position
                     self.Walls.append(
